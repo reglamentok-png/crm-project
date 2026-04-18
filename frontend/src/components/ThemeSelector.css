@@ -1,0 +1,125 @@
+/* Стили для компонента ThemeSelector */
+.theme-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.theme-selector .btn {
+  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+.theme-selector .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.theme-dropdown-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #dee2e6;
+  overflow: hidden;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+.theme-option:last-child {
+  border-bottom: none;
+}
+
+.theme-option:hover {
+  background-color: #f8f9fa;
+}
+
+.theme-option.active {
+  background-color: #e7f1ff;
+}
+
+.theme-preview {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+  border: 1px solid #dee2e6;
+}
+
+.theme-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #212529;
+}
+
+.theme-check {
+  color: #0d6efd;
+  font-size: 1rem;
+}
+
+/* Темная тема для выпадающего меню */
+body.dark-theme .theme-dropdown-content {
+  background-color: #343a40;
+  border-color: #495057;
+}
+
+body.dark-theme .theme-option {
+  border-bottom-color: #495057;
+  color: #f8f9fa;
+}
+
+body.dark-theme .theme-option:hover {
+  background-color: #495057;
+}
+
+body.dark-theme .theme-option.active {
+  background-color: #495057;
+}
+
+body.dark-theme .theme-info {
+  color: #f8f9fa;
+}
+
+body.dark-theme .theme-check {
+  color: #86b7fe;
+}
+
+/* Пастельная тема для выпадающего меню */
+body.pastel-theme .theme-dropdown-content {
+  background-color: #f8f9fa;
+  border-color: #e9ecef;
+}
+
+body.pastel-theme .theme-option {
+  border-bottom-color: #e9ecef;
+}
+
+body.pastel-theme .theme-option:hover {
+  background-color: #f1f3f4;
+}
+
+body.pastel-theme .theme-option.active {
+  background-color: #f1f3f4;
+}

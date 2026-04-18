@@ -1,0 +1,349 @@
+/* Основные стили приложения */
+.App {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.container-fluid {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Аватарки */
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Карточки */
+.card {
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0 !important;
+}
+
+/* Кнопки */
+.btn {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0b5ed7, #0a58ca);
+  transform: translateY(-2px);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #198754, #157347);
+  border: none;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #157347, #146c43);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545, #bb2d3b);
+  border: none;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #bb2d3b, #b02a37);
+  transform: translateY(-2px);
+}
+
+/* Таблицы */
+.table {
+  background-color: #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background-color: #dee2e6;
+  border-bottom: 2px solid #ced4da;
+  font-weight: 600;
+  color: #495057;
+}
+
+.table tbody tr {
+  background-color: #e9ecef;
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: white;
+}
+
+/* Формы */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Алерты */
+.alert {
+  border-radius: 8px;
+  border: none;
+}
+
+/* Спиннеры */
+.spinner-border {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .row {
+    flex-direction: column;
+  }
+  
+  .col-md-4, .col-md-8, .col-lg-3, .col-lg-9 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .table-responsive {
+    font-size: 14px;
+  }
+}
+
+/* Утилиты */
+.text-muted {
+  color: #6c757d !important;
+}
+
+.shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Стили для разных тем */
+
+/* Светлая тема (по умолчанию) */
+body.light-theme {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+body.light-theme .App {
+  background-color: #f8f9fa;
+}
+
+body.light-theme .card {
+  background-color: white;
+}
+
+body.light-theme .table {
+  background-color: white;
+}
+
+body.light-theme .form-control {
+  background-color: white;
+  border-color: #ced4da;
+  color: #212529;
+}
+
+/* Пастельная тема */
+body.pastel-theme {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+body.pastel-theme .App {
+  background-color: #f8f9fa;
+}
+
+body.pastel-theme .header {
+  background: linear-gradient(135deg, #6f42c1, #5a32a3) !important;
+}
+
+body.pastel-theme .btn-primary {
+  background: linear-gradient(135deg, #6f42c1, #5a32a3) !important;
+  border: none;
+}
+
+body.pastel-theme .btn-success {
+  background: linear-gradient(135deg, #20c997, #1ba87e) !important;
+  border: none;
+}
+
+body.pastel-theme .card {
+  background-color: white;
+  border: 1px solid #e9ecef;
+}
+
+body.pastel-theme .table {
+  background-color: #f8f9fa;
+}
+
+body.pastel-theme .table thead th {
+  background-color: #e9ecef;
+}
+
+body.pastel-theme .table tbody tr {
+  background-color: #f8f9fa;
+}
+
+body.pastel-theme .table tbody tr:hover {
+  background-color: white;
+}
+
+body.pastel-theme .form-control {
+  background-color: white;
+  border-color: #e9ecef;
+  color: #212529;
+}
+
+/* Темная тема */
+body.dark-theme {
+  background-color: #343a40;
+  color: #f8f9fa;
+}
+
+body.dark-theme .App {
+  background-color: #343a40;
+}
+
+body.dark-theme .header {
+  background: linear-gradient(135deg, #212529, #343a40) !important;
+}
+
+body.dark-theme .card {
+  background-color: #495057;
+  color: #f8f9fa;
+  border-color: #6c757d;
+}
+
+body.dark-theme .card-header {
+  background-color: #6c757d !important;
+  color: #f8f9fa;
+}
+
+body.dark-theme .table {
+  background-color: #495057;
+  color: #f8f9fa;
+}
+
+body.dark-theme .table thead th {
+  background-color: #6c757d;
+  color: #f8f9fa;
+  border-color: #6c757d;
+}
+
+body.dark-theme .table tbody tr {
+  background-color: #495057;
+  transition: background-color 0.2s ease;
+}
+
+body.dark-theme .table tbody td {
+  border-color: #6c757d;
+}
+
+body.dark-theme .table tbody tr:hover {
+  background-color: #6c757d;
+}
+
+body.dark-theme .form-control {
+  background-color: #495057;
+  border-color: #6c757d;
+  color: #f8f9fa;
+}
+
+body.dark-theme .form-control:focus {
+  background-color: #495057;
+  border-color: #86b7fe;
+  color: #f8f9fa;
+}
+
+body.dark-theme .form-label {
+  color: #f8f9fa;
+}
+
+body.dark-theme .text-muted {
+  color: #adb5bd !important;
+}
+
+body.dark-theme .btn-outline-primary {
+  color: #86b7fe;
+  border-color: #86b7fe;
+}
+
+body.dark-theme .btn-outline-primary:hover {
+  background-color: #86b7fe;
+  color: #212529;
+}
+
+body.dark-theme .btn-outline-secondary {
+  color: #adb5bd;
+  border-color: #adb5bd;
+}
+
+body.dark-theme .btn-outline-secondary:hover {
+  background-color: #adb5bd;
+  color: #212529;
+}
+
+body.dark-theme .modal-content {
+  background-color: #495057;
+  color: #f8f9fa;
+}
+
+body.dark-theme .modal-header {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+body.dark-theme .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}

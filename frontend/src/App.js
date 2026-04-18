@@ -10,6 +10,9 @@ function App() {
   const [error, setError] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [theme, setTheme] = useState('dark');
+  
+  // Определяем URL API из переменной окружения или используем localhost по умолчанию
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
   // Загрузка контактов при монтировании компонента
   useEffect(() => {
@@ -33,7 +36,7 @@ function App() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000);
       
-      const response = await fetch('http://localhost:5001/api/contacts', {
+      const response = await fetch(`${API_URL}/api/contacts`, {
         signal: controller.signal
       });
       
@@ -51,7 +54,7 @@ function App() {
       if (err.name === 'AbortError') {
         errorMessage = 'Превышено время ожидания ответа от сервера (30 секунд). Сервер может быть запускается.';
       } else if (err.message.includes('Failed to fetch')) {
-        errorMessage = 'Не удалось подключиться к серверу. Проверьте, запущен ли бэкенд на порту 5001.';
+        errorMessage = `Не удалось подключиться к серверу. Проверьте доступность API по адресу: ${API_URL}`;
       } else {
         errorMessage = err.message;
       }
@@ -65,7 +68,7 @@ function App() {
 
   const handleAddContact = async (newContact) => {
     try {
-      const response = await fetch('http://localhost:5001/api/contacts', {
+      const response = await fetch(`${API_URL}/api/contacts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +90,7 @@ function App() {
 
   const handleDeleteContact = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5001/api/contacts/${id}`, {
+      const response = await fetch(`${API_URL}/api/contacts/${id}`, {
         method: 'DELETE',
       });
       
@@ -187,7 +190,7 @@ function App() {
                     className="btn btn-outline-secondary"
                     onClick={() => {
                       // Показать дополнительные инструкции
-                      alert('Проверьте:\n1. Запущен ли бэкенд на порту 5001\n2. Правильно ли настроена база данных PostgreSQL\n3. Доступен ли сервер по адресу http://localhost:5001');
+                      alert(`Проверьте:\n1. Запущен ли бэкенд\n2. Правильно ли настроена база данных PostgreSQL\n3. Доступен ли сервер по адресу: ${API_URL}\n\nТекущий API URL: ${API_URL}`);
                     }}
                   >
                     <i className="bi bi-question-circle me-2"></i>

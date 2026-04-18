@@ -4,7 +4,7 @@ echo Запуск CRM системы управления контактами
 echo ========================================
 echo.
 
-echo 1. Запуск бэкенда (Node.js + Express + SQLite)...
+echo 1. Запуск бэкенда (Node.js + Express + PostgreSQL)...
 start cmd /k "cd /d %~dp0backend && npm start"
 timeout /t 3 /nobreak >nul
 

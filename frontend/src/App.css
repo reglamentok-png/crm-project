@@ -132,10 +132,138 @@
   border: none;
 }
 
-/* Спиннеры */
+/* Спиннеры и индикаторы загрузки */
 .spinner-border {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+/* Прогресс-бар для длительных запросов */
+.progress {
+  height: 6px;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  transition: width 0.3s ease;
+}
+
+/* Анимация пульсации для индикатора загрузки */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Улучшенный индикатор загрузки */
+.loading-container {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: rgba(248, 249, 250, 0.8);
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.loading-container.dark {
+  background-color: rgba(52, 58, 64, 0.8);
+}
+
+.loading-text {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  color: #6c757d;
+}
+
+.loading-container.dark .loading-text {
+  color: #adb5bd;
+}
+
+/* Анимация для спиннера */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-border {
+  animation: spin 0.75s linear infinite;
+}
+
+/* Сообщения об ошибках */
+.error-container {
+  padding: 30px 20px;
+  text-align: center;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.error-container.dark {
+  background-color: rgba(114, 28, 36, 0.8);
+  border-color: #721c24;
+}
+
+.error-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #721c24;
+  margin-bottom: 10px;
+}
+
+.error-container.dark .error-title {
+  color: #f8d7da;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: #721c24;
+  margin-bottom: 20px;
+}
+
+.error-container.dark .error-message {
+  color: #f8d7da;
+}
+
+.error-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Адаптивность для сообщений об ошибках */
+@media (max-width: 576px) {
+  .loading-container,
+  .error-container {
+    padding: 20px 15px;
+    margin: 15px 0;
+  }
+  
+  .error-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .error-actions .btn {
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 10px;
+  }
 }
 
 /* Адаптивность */

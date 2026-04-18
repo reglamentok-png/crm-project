@@ -27,16 +27,37 @@ function App() {
   const fetchContacts = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:5001/api/contacts');
+      setError(null);
+      
+      // Увеличиваем таймаут до 30 секунд для первого запроса
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+      
+      const response = await fetch('http://localhost:5001/api/contacts', {
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+      
       if (!response.ok) {
-        throw new Error('Ошибка загрузки контактов');
+        throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
       }
+      
       const data = await response.json();
       setContacts(data);
-      setError(null);
     } catch (err) {
-      setError(err.message);
-      console.error('Ошибка:', err);
+      let errorMessage = 'Ошибка загрузки контактов';
+      
+      if (err.name === 'AbortError') {
+        errorMessage = 'Превышено время ожидания ответа от сервера (30 секунд). Сервер может быть запускается.';
+      } else if (err.message.includes('Failed to fetch')) {
+        errorMessage = 'Не удалось подключиться к серверу. Проверьте, запущен ли бэкенд на порту 5001.';
+      } else {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
+      console.error('Ошибка загрузки контактов:', err);
     } finally {
       setLoading(false);
     }
@@ -128,21 +149,51 @@ function App() {
         <div className="row">
           <div className="col-12">
             {loading ? (
-              <div className="text-center py-3">
-                <div className="spinner-border text-primary" role="status">
+              <div className={`loading-container ${theme === 'dark' ? 'dark' : ''}`}>
+                <div className="spinner-border text-primary" style={{ width: '3rem', height: '3rem' }} role="status">
                   <span className="visually-hidden">Загрузка...</span>
                 </div>
-                <p className="mt-2">Загрузка контактов...</p>
+                <p className="loading-text">Загрузка контактов...</p>
+                <div className="progress mt-3" style={{ maxWidth: '300px', margin: '0 auto' }}>
+                  <div 
+                    className="progress-bar progress-bar-striped progress-bar-animated" 
+                    role="progressbar" 
+                    style={{ width: '100%' }}
+                    aria-valuenow="100" 
+                    aria-valuemin="0" 
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <p className="text-muted mt-2 small">
+                  Это может занять несколько секунд, если сервер запускается...
+                </p>
               </div>
             ) : error ? (
-              <div className="alert alert-danger" role="alert">
-                Ошибка: {error}
-                <button 
-                  className="btn btn-sm btn-outline-danger ms-2"
-                  onClick={fetchContacts}
-                >
-                  Повторить
-                </button>
+              <div className={`error-container ${theme === 'dark' ? 'dark' : ''}`}>
+                <h5 className="error-title">
+                  <i className="bi bi-exclamation-triangle-fill me-2"></i>
+                  Ошибка загрузки
+                </h5>
+                <p className="error-message">{error}</p>
+                <div className="error-actions">
+                  <button 
+                    className="btn btn-primary"
+                    onClick={fetchContacts}
+                  >
+                    <i className="bi bi-arrow-clockwise me-2"></i>
+                    Повторить попытку
+                  </button>
+                  <button 
+                    className="btn btn-outline-secondary"
+                    onClick={() => {
+                      // Показать дополнительные инструкции
+                      alert('Проверьте:\n1. Запущен ли бэкенд на порту 5001\n2. Правильно ли настроена база данных PostgreSQL\n3. Доступен ли сервер по адресу http://localhost:5001');
+                    }}
+                  >
+                    <i className="bi bi-question-circle me-2"></i>
+                    Что делать?
+                  </button>
+                </div>
               </div>
             ) : (
               <ContactList 

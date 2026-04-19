@@ -19,3 +19,54 @@
     border-radius: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+/* Стили для переключателя автообновления */
+.header .form-check-input {
+    width: 3em;
+    height: 1.5em;
+    cursor: pointer;
+}
+
+.header .form-check-input:checked {
+    background-color: #20c997;
+    border-color: #20c997;
+}
+
+.header .form-check-label {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.header .form-check-label:hover {
+    opacity: 0.9;
+}
+
+/* Стили для времени обновления */
+.header small {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .header .row {
+        text-align: center;
+    }
+    
+    .header .col-md-4 {
+        margin-bottom: 0.5rem;
+    }
+    
+    .header .text-end {
+        text-align: center !important;
+    }
+    
+    .header .d-flex {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .header .ms-3 {
+        margin-left: 0 !important;
+    }
+}

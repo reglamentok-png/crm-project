@@ -10,6 +10,8 @@ function App() {
   const [error, setError] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
   const [theme, setTheme] = useState('dark');
+  const [autoRefresh, setAutoRefresh] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState(null);
   
   // Определяем URL API из переменной окружения или используем localhost по умолчанию
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
@@ -18,6 +20,23 @@ function App() {
   useEffect(() => {
     fetchContacts();
   }, []);
+
+  // Автоматическое обновление контактов каждые 10 секунд
+  useEffect(() => {
+    let intervalId;
+    
+    if (autoRefresh) {
+      intervalId = setInterval(() => {
+        fetchContacts();
+      }, 10000); // 10 секунд
+    }
+    
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [autoRefresh]);
 
   // Применение темы при изменении
   useEffect(() => {
@@ -48,6 +67,7 @@ function App() {
       
       const data = await response.json();
       setContacts(data);
+      setLastUpdated(new Date());
     } catch (err) {
       let errorMessage = 'Ошибка загрузки контактов';
       
@@ -113,10 +133,17 @@ function App() {
     return result;
   };
 
+  const toggleAutoRefresh = () => {
+    setAutoRefresh(!autoRefresh);
+  };
+
   return (
     <div className="App">
       <Header 
         onAddContactClick={() => setShowAddForm(true)}
+        autoRefresh={autoRefresh}
+        onToggleAutoRefresh={toggleAutoRefresh}
+        lastUpdated={lastUpdated}
       />
       
       {/* Модальное окно для добавления контакта */}
